@@ -88,9 +88,12 @@ function wpcc_pco_giving_script (){
 
 /******* Filter the card link to trigger the popup ******/
 function wpcc_pco_giving_link($card_link) {
+
+  if(get_field('wpcc_card_type', get_the_ID()) === 'pco_giving') {
 	
-	$card_link = 'https://' . get_field('pco_giving_subdomain', get_the_ID() ) . '.churchcenteronline.com/giving?open-in-church-center-modal=true';
+	 $card_link = 'https://' . get_field('pco_giving_subdomain', get_the_ID() ) . '.churchcenteronline.com/giving?open-in-church-center-modal=true';
+  }
  
 	return $card_link;
 }
-add_filter('wpcc_card_link', 'wpcc_pco_giving_link');
+add_filter('wpcc_card_link', 'wpcc_pco_giving_link', 10, 1);
